@@ -1,3 +1,20 @@
+addEventListener("DOMContentLoaded", el => {
+    let windowSize = displayWindowsSize();
+    let maxSquare = Math.round(calcule_maxSquare(windowSize.width));
+    let maxRow = Math.round(calcule_maxRow(windowSize.heigth));
+    
+/**
+ * @name initGrid
+ * @description first init grid depends of user first size window;
+ */
+function initGrid() {
+    dynamicGrid(maxSquare, maxRow);
+    blockFactory(maxSquare, maxRow);
+}
+initGrid();
+
+blockFactory();
+});
 
 /**
  * @name displayWindowsSize
@@ -12,7 +29,6 @@ function displayWindowsSize(){
         "heigth" : windowHeight,
     }
 }
-
 window.addEventListener("resize", function(){
     clean();
     let windowSize = displayWindowsSize();
@@ -22,31 +38,29 @@ window.addEventListener("resize", function(){
     blockFactory(maxSquare, maxRow);
 
 });
-
 function clean() {
     let grid = document.querySelector("#container-grid");
     grid.innerHTML = "";
 }
-
 function blockFactory(maxSquare, maxRow) {
     for(i = 1; i <= maxSquare; i++) {
         creatBlock(i, maxSquare);
        
         for(j = 0; j <= maxRow; j++) {
-            creatBlock(i, maxRow, j);
+            creatBlock(i, j);
         }
     }
 }
-
 /**
  * @name creatBlock
  * @return DOM block
  */
-function creatBlock(blockNbr, maxRow, j) {
+function creatBlock(blockNbr, j) {
     let containerGrid = document.getElementById("container-grid");
     let block = document.createElement("div");
+    
     block.className = "block" + blockNbr;
-    block.style.backgroundColor = "whith";
+    block.style.backgroundColor = "white";
     block.style.border = "solid";
     block.style.borderColor = "black";
     block.style.height = 300;
@@ -59,7 +73,6 @@ function creatBlock(blockNbr, maxRow, j) {
     containerGrid.appendChild(block);
     
 }
-
 /**
  * 
  * @param {int} maxSquare 
@@ -73,17 +86,15 @@ function dynamicGrid(maxSquare, maxRow){
     containerGrid.style.gridRow = maxRow;
 
 }
-
-
 /**
  * @Todo posibility to change dynamicly block width
  */
 function calcule_maxSquare(windowWidth) {
     let maxSquare = windowWidth / 300;
     maxSquare > 12 ? maxSquare = 12 : maxSquare < 1 ? maxSquare = 1 : maxSquare;
+    console.log(maxSquare);
     return maxSquare;
 }
-
 /**
  * @Todo posibility to change dynamicly block width
  */
@@ -92,3 +103,4 @@ function calcule_maxRow(windowHeight) {
     maxHeight > 12 ? maxHeight = 12 : maxHeight < 1 ? maxHeight = 1 : maxHeight;
     return maxHeight;
 }
+
