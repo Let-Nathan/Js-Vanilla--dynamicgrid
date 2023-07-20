@@ -44,9 +44,7 @@ function clean() {
 }
 function blockFactory(maxSquare, maxRow) {
     for(i = 1; i <= maxSquare; i++) {
-        creatBlock(i, maxSquare);
-       
-        for(j = 0; j <= maxRow; j++) {
+        for(j = 1; j <= maxRow; j++) {
             creatBlock(i, j);
         }
     }
@@ -74,16 +72,15 @@ function creatBlock(blockNbr, j) {
     
 }
 /**
- * 
+ * @name dynamicGrid
  * @param {int} maxSquare 
  * @param {int} maxRow
  */
 function dynamicGrid(maxSquare, maxRow){
     let containerGrid = document.getElementById("container-grid");
     containerGrid.style.display = "grid";
-    containerGrid.style.width = "100%";
-    containerGrid.style.gridColumn = maxSquare; 
-    containerGrid.style.gridRow = maxRow;
+    containerGrid.style.gridTemplateColumns = `repeat(${maxSquare}, 1fr)`;
+    containerGrid.style.gridTemplateRows = `repeat(${maxRow}, 1fr)`;
 
 }
 /**
@@ -92,7 +89,7 @@ function dynamicGrid(maxSquare, maxRow){
 function calcule_maxSquare(windowWidth) {
     let maxSquare = windowWidth / 300;
     maxSquare > 12 ? maxSquare = 12 : maxSquare < 1 ? maxSquare = 1 : maxSquare;
-    console.log(maxSquare);
+    console.log("max square or width ===>" + maxSquare);
     return maxSquare;
 }
 /**
@@ -101,6 +98,7 @@ function calcule_maxSquare(windowWidth) {
 function calcule_maxRow(windowHeight) {
     let maxHeight = windowHeight / 300;
     maxHeight > 12 ? maxHeight = 12 : maxHeight < 1 ? maxHeight = 1 : maxHeight;
+    console.log("maxheig ==>" + maxHeight);
     return maxHeight;
 }
 
