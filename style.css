@@ -4,7 +4,6 @@ body{
 }
 #container-grid {
     display: grid;
-    margin: 2px;
-    padding: 2px;
+    padding: 1px;
     
 }
